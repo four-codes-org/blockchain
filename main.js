@@ -24,7 +24,7 @@ app.post("/transaction", (req, res) => {
 });
 
 app.get("/approvePendingTransaction", (req, res) => {
-  res.json({ newBlock: Blockchain.pendingTransactionAddToBlocks() });
+  res.json({ blockAdd: Blockchain.pendingTransactionAddToBlocks() });
 });
 
 app.get("/block/:blockHash", (req, res) => {
@@ -36,8 +36,8 @@ app.get("/block/:blockHash", (req, res) => {
 });
 
 app.get("/transaction/:transactionId", (req, res) => {
-  const transactionId = req.params.transactionId;
-  const trasactionData = Blockchain.getTransaction(transactionId);
+  let transactionId = req.params.transactionId;
+  let trasactionData = Blockchain.getTransaction(transactionId);
   res.json({
     transaction: trasactionData.transaction,
     block: trasactionData.block,
@@ -45,10 +45,17 @@ app.get("/transaction/:transactionId", (req, res) => {
 });
 
 app.get("/address/:address", (req, res) => {
-  const address = req.params.address;
-  const addressData = Blockchain.getAddressData(address);
+  let address = req.params.address;
+  let addressData = Blockchain.getAddressData(address);
   res.json({
     addressData: addressData,
+  });
+});
+
+app.get("/pendingTransaction", (req, res) => {
+  const pendingTransactionsData = Blockchain.blockPendingTransactions();
+  res.json({
+    pendingTransactionsData,
   });
 });
 

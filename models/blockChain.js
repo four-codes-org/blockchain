@@ -4,14 +4,13 @@ const uuid = require("uuid");
 class blockChain {
   constructor() {
     this.chain = [];
-    this.user = [];
     this.pendingTransactions = [];
     this.networkNodes = [];
-    this.createNewBlock(100, "0", "0");
+    this.createNewBlock(0, 0, 0);
   }
 
   createNewBlock(nonce, previousBlockHash, hash) {
-    const newBlock = {
+    const block = {
       index: this.chain.length + 1,
       timestamp: Date.now(),
       transactions: this.pendingTransactions,
@@ -19,9 +18,11 @@ class blockChain {
       hash: hash,
       previousBlockHash: previousBlockHash,
     };
+
     this.pendingTransactions = [];
-    this.chain.push(newBlock);
-    return newBlock;
+    this.chain.push(block);
+
+    return block;
   }
 
   getLastBlock() {
@@ -169,6 +170,17 @@ class blockChain {
     let blockHash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
     let newBlock = this.createNewBlock(nonce, previousBlockHash, blockHash);
     return newBlock;
+  }
+
+  blockPendingTransactions(transactionId = "none") {
+    let pendingTransactions = this.pendingTransactions;
+    if (pendingTransactions.length != 0) {
+      if (transactionId != "none") {
+        return pendingTransactionsData.filter((data) => data.transactionId == transactionId);
+      }
+      return pendingTransactions;
+    }
+    return "All transactions are up to date";
   }
 }
 
