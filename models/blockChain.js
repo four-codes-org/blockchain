@@ -176,7 +176,9 @@ class blockChain {
     let pendingTransactions = this.pendingTransactions;
     if (pendingTransactions.length != 0) {
       if (transactionId != "none") {
-        return pendingTransactionsData.filter((data) => data.transactionId == transactionId);
+        return pendingTransactionsData.filter(
+          (data) => data.transactionId == transactionId
+        );
       }
       return pendingTransactions;
     }

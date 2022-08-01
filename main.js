@@ -44,6 +44,14 @@ app.get("/transaction/:transactionId", (req, res) => {
   });
 });
 
+app.get("/transaction", (req, res) => {
+  let trasactionData = Blockchain.getTransaction();
+  res.json({
+    transaction: trasactionData.transaction,
+    block: trasactionData.block,
+  });
+});
+
 app.get("/address/:address", (req, res) => {
   let address = req.params.address;
   let addressData = Blockchain.getAddressData(address);
