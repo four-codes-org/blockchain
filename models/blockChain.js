@@ -4,6 +4,7 @@ const uuid = require("uuid");
 class blockChain {
   constructor() {
     this.chain = [];
+    this.user = [];
     this.pendingTransactions = [];
     this.networkNodes = [];
     this.createNewBlock(100, "0", "0");
